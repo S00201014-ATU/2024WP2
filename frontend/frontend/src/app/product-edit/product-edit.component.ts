@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
-  styleUrl: './product-edit.component.css' // Corrected property name
+  styleUrl: './product-edit.component.css'
 })
 export class ProductEditComponent implements OnInit {
   productId: number | null = null;
@@ -25,7 +25,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.product) { // Ensure product is not null or undefined
+    if (this.product) {
       this.productService.updateProduct(this.product);
       this.router.navigate(['']);
     } else {
