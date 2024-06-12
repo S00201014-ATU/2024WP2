@@ -27,7 +27,7 @@ export class ProductEditComponent implements OnInit {
   onSubmit(): void {
     if (this.product) {
       this.productService.updateProduct(this.product);
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     } else {
       console.error("Product is missing. Cannot update product.");
     }
