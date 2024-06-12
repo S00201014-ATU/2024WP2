@@ -10,11 +10,14 @@ import { Router } from '@angular/router';
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
+  filteredProducts: Product[] = [];
+  searchTerm: string = '';
 
-  constructor(private productService: ProductService, private router:Router) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
     this.products = this.productService.getProducts();
+    this.filteredProducts = this.products;
   }
 
   viewProductDetails(productId: number): void {
@@ -25,10 +28,21 @@ export class ProductListComponent implements OnInit {
     this.router.navigate(['/edit-product', productId]);
   }
 
-  deleteProduct(productId: number): void{
+  deleteProduct(productId: number): void {
     if (confirm('Are you sure you want to delete this product from the store?')) {
       this.productService.deleteProduct(productId);
       this.products = this.productService.getProducts();
+      this.filterProducts();
+    }
+  }
+
+  filterProducts(): void {
+    if (this.searchTerm) {
+      this.filteredProducts = this.products.filter(product =>
+        product.name.toLowerCase().startsWith(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredProducts = this.products;
     }
   }
 }

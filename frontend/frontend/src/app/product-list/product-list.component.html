@@ -1,5 +1,14 @@
-<div class="product-container">
-  <div *ngFor="let product of products" class="product-card">
+<div class="search-bar">
+  <input type="text" placeholder="Search products..." [(ngModel)]="searchTerm" (keyup.enter)="filterProducts()" class="search-input">
+  <button (click)="filterProducts()" class="search-button">Search</button>
+</div>
+
+<div *ngIf="filteredProducts.length === 0" class="no-results">
+  No products match your search of "{{searchTerm}}".
+</div>
+
+<div class="product-container" *ngIf="filteredProducts.length > 0">
+  <div *ngFor="let product of filteredProducts" class="product-card">
     <img [src]="product.imageUrl" alt="{{product.name}}" class="product-image" (click)="viewProductDetails(product.id)">
     <h2 class="product-name">{{product.name}}</h2>
     <p class="product-price">€{{product.price}}</p>
