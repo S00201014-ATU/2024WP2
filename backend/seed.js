@@ -1,7 +1,7 @@
 const {MongoClient} = require('mongodb');
 
 const uri = "mongodb+srv://Matthew902:Manu1234@wp2repeat2024.bmdxgib.mongodb.net/?retryWrites=true&w=majority&appName=WP2Repeat2024";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true});
+const client = new MongoClient(uri);
 
 async function seedProducts() {
     try {
