@@ -1,4 +1,6 @@
 <form (ngSubmit)="onSubmit()" class="product-edit-form">
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" [(ngModel)]="product.name" required class="input-field">
 
@@ -8,8 +10,8 @@
   <label for="imageUrl">Image URL:</label>
   <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="product.imageUrl" required class="input-field">
 
-  <label for="description">Description</label>
-  <textarea id="description" name="description" [(ngModel)]="product.description" class="textarea-field"></textarea>
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" [(ngModel)]="product.description" required class="textarea-field"></textarea>
 
   <button type="submit" class="update-button">Update</button>
 </form>

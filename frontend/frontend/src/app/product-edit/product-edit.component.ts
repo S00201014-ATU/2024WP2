@@ -6,11 +6,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
-  styleUrl: './product-edit.component.css'
+  styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
   productId: number | null = null;
-  product!: Product;
+  product: Product = {
+    id: 0,
+    name: '',
+    price: 0,
+    imageUrl: '',
+    description: ''
+  };
+  errorMessage: string = '';
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) {}
 
@@ -18,18 +25,23 @@ export class ProductEditComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
       this.productId = +id;
-      this.product = this.productService.getProductById(this.productId)!;
+      const product = this.productService.getProductById(this.productId);
+      if (product) {
+        this.product = product;
+      } else {
+        console.error("Product not found.");
+      }
     } else {
       console.error("Product ID is missing from route parameters.");
     }
   }
 
   onSubmit(): void {
-    if (this.product) {
+    if (this.product.name && this.product.price && this.product.imageUrl && this.product.description) {
       this.productService.updateProduct(this.product);
       this.router.navigate(['/']);
     } else {
-      console.error("Product is missing. Cannot update product.");
+      this.errorMessage = "Please fill in all fields before updating the product.";
     }
   }
 }
