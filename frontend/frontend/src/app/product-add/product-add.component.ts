@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ProductAddComponent {
   newProduct: Product = {
-    id: 0,
+    _id: 0,
     name: '',
     price: 0,
     imageUrl: '',

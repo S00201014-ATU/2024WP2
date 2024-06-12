@@ -9,12 +9,12 @@
 
 <div class="product-container" *ngIf="filteredProducts.length > 0">
   <div *ngFor="let product of filteredProducts" class="product-card">
-    <img [src]="product.imageUrl" alt="{{product.name}}" class="product-image" (click)="viewProductDetails(product.id)">
+    <img [src]="product.imageUrl" alt="{{product.name}}" class="product-image" (click)="viewProductDetails(product._id)">
     <h2 class="product-name">{{product.name}}</h2>
     <p class="product-price">€{{product.price}}</p>
     <div class="button-group">
-      <button class="edit-button" (click)="editProduct(product.id)">Edit</button>
-      <button class="delete-button" (click)="deleteProduct(product.id)">Delete</button>
+      <button class="edit-button" (click)="editProduct(product._id)">Edit</button>
+      <button class="delete-button" (click)="deleteProduct(product._id)">Delete</button>
     </div>
   </div>
 </div>

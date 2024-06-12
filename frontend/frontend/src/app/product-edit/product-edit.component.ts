@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductEditComponent implements OnInit {
   productId: number | null = null;
   product: Product = {
-    id: 0,
+    _id: 0,
     name: '',
     price: 0,
     imageUrl: '',
