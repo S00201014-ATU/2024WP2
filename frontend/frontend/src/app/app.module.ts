@@ -9,6 +9,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { FormsModule } from '@angular/forms';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     ProductListComponent,
     ProductDetailsComponent,
     ProductEditComponent,
-    ProductAddComponent
+    ProductAddComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
