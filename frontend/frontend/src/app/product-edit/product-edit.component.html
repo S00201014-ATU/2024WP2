@@ -1,1 +1,15 @@
-<p>product-edit works!</p>
+<form (ngSubmit)="onSubmit()">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" [(ngModel)]="product.name" required>
+
+  <label for="price">Price:</label>
+  <input type="number" id="price" name="price" [(ngModel)]="product.price" required>
+
+  <label for="imageUrl">Image URL:</label>
+  <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="product.imageUrl" required>
+
+  <label for="description">Description</label>
+  <textarea id="description" name="description" [(ngModel)]="product.description"></textarea>
+
+  <button type="submit">Save</button>
+</form>
