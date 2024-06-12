@@ -20,4 +20,8 @@ export class ProductListComponent implements OnInit {
   viewProductDetails(productId: number): void {
     this.router.navigate(['/product', productId]);
   }
+
+  editProduct(productId: number): void {}
+
+  deleteProduct(productId: number): void{}
 }
