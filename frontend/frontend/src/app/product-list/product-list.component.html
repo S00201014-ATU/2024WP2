@@ -2,4 +2,6 @@
   <img [src]="product.imageUrl" alt="{{product.name}}" (click)="viewProductDetails(product.id)">
   <h2>{{product.name}}</h2>
   <p>€{{product.price}}</p>
+  <button (click)="editProduct(product.id)">Edit</button>
+  <button (click)="deleteProduct(product.id)">Delete</button>
 </div>
