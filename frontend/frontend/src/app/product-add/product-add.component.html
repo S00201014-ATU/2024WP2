@@ -1,15 +1,15 @@
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" class="product-add-form">
   <label for="name">Name:</label>
-  <input type="text" id="name" name="name" [(ngModel)]="newProduct.name" required>
+  <input type="text" id="name" name="name" [(ngModel)]="newProduct.name" required class="input-field">
 
   <label for="price">Price:</label>
-  <input type="number" id="price" name="price" [(ngModel)]="newProduct.price" required>
+  <input type="number" id="price" name="price" [(ngModel)]="newProduct.price" required class="input-field">
 
   <label for="imageUrl">Image URL:</label>
-  <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="newProduct.imageUrl" required>
+  <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="newProduct.imageUrl" required class="input-field">
 
   <label for="description">Description</label>
-  <textarea id="description" name="description" [(ngModel)]="newProduct.description" required></textarea>
+  <textarea id="description" name="description" [(ngModel)]="newProduct.description" required class="textarea-field"></textarea>
 
-  <button type="submit">Add Product</button>
+  <button type="submit" class="add-button">Add Product</button>
 </form>
