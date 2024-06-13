@@ -1,41 +1,38 @@
-import { Injectable } from "@angular/core";
-import { Product } from "../models/product";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private products: Product[] = [
-    { _id: 1, name: 'Portugal', price: 50.00, imageUrl: 'https://www.sportsdirect.com/images/products/37096608_l.jpg', description: 'More glory for Ronaldo?' },
-    { _id: 2, name: 'England', price: 20.00, imageUrl: 'https://www.sportsdirect.com/images/products/37078101_l.jpg', description: 'Is it coming home?' },
-    { _id: 3, name: 'France', price: 100.00, imageUrl: 'https://www.sportsdirect.com/images/products/37997518_l.jpg', description: 'Mbappe to lead the way?' },
-    { _id: 4, name: 'Netherlands', price: 10.00, imageUrl: 'https://www.sportsdirect.com/images/products/37263512_l.jpg', description: 'Could they be the dark horses?' },
-    { _id: 5, name: 'Ireland', price: 80.00, imageUrl: 'https://www.soccerbox.com/media/catalog/product/cache/f4b6407e5847ea579fdc5730945961f6/i/r/ireland-kids-home-shirt-23.jpg', description: 'Why are we not there?' },
-    { _id: 6, name: 'Scotland', price: 25.00, imageUrl: 'https://www.sportsdirect.com/images/products/36099218_l.jpg', description: 'How many goals will they concede?' },
-  ];
+  private apiUrl = 'http://localhost:3000/products';
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
-  getProducts(): Product[] {
-    return this.products;
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl);
   }
 
-  getProductById(id: number): Product | undefined {
-    return this.products.find(product => product._id === id);
+  getProductById(id: string): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 
-  addProduct(product: Product): void {
-    this.products.push(product);
+  addProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.apiUrl, product);
   }
 
-  updateProduct(updatedProduct: Product): void {
-    const index = this.products.findIndex(product => product._id === updatedProduct._id);
-    if (index !== -1) {
-      this.products[index] = updatedProduct;
-    }
+  updateProduct(product: Product): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${product._id}`, product);
   }
 
-  deleteProduct(id: number): void {
-    this.products = this.products.filter(product => product._id !== id);
+  deleteProduct(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    // Handle the error appropriately here
+    return throwError(error.message || 'Server Error');
   }
 }

@@ -1,17 +1,15 @@
-<form (ngSubmit)="onSubmit()" class="product-edit-form">
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-
+<div *ngIf="product" class="edit-product">
   <label for="name">Name:</label>
-  <input type="text" id="name" name="name" [(ngModel)]="product.name" required class="input-field">
+  <input type="text" id="name" name="name" [(ngModel)]="product.name">
 
   <label for="price">Price:</label>
-  <input type="number" id="price" name="price" [(ngModel)]="product.price" required class="input-field">
+  <input type="number" id="price" name="price" [(ngModel)]="product.price">
 
   <label for="imageUrl">Image URL:</label>
-  <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="product.imageUrl" required class="input-field">
+  <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="product.imageUrl">
 
   <label for="description">Description:</label>
-  <textarea id="description" name="description" [(ngModel)]="product.description" required class="textarea-field"></textarea>
+  <textarea id="description" name="description" [(ngModel)]="product.description"></textarea>
 
-  <button type="submit" class="update-button">Update</button>
-</form>
+  <button (click)="updateProduct()">Update Product</button>
+</div>

@@ -16,23 +16,33 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
-    this.filteredProducts = this.products;
+    this.loadProducts();
   }
 
-  viewProductDetails(productId: number): void {
-    this.router.navigate(['/product', productId]);
+  loadProducts(): void {
+    this.productService.getProducts().subscribe(products => {
+      this.products = products;
+      this.filteredProducts = products;
+    });
   }
 
-  editProduct(productId: number): void {
+  viewProductDetails(productId: string): void {
+    console.log(`Navigating to product details for ID: ${productId}`);
+    this.router.navigate(['/products', productId]);
+  }
+
+  editProduct(productId: string): void {
     this.router.navigate(['/edit-product', productId]);
   }
 
-  deleteProduct(productId: number): void {
+  deleteProduct(productId: string): void {
     if (confirm('Are you sure you want to delete this product from the store?')) {
-      this.productService.deleteProduct(productId);
-      this.products = this.productService.getProducts();
-      this.filterProducts();
+      this.productService.deleteProduct(productId).subscribe(() => {
+        this.loadProducts();
+      }, error => {
+        console.error('Error deleting product:', error);
+        alert('Error deleting product. Please try again.');
+      });
     }
   }
 

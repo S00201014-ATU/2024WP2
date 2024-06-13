@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { Product } from '../models/product';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-edit',
@@ -9,39 +9,56 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-  productId: number | null = null;
-  product: Product = {
-    _id: 0,
-    name: '',
-    price: 0,
-    imageUrl: '',
-    description: ''
-  };
-  errorMessage: string = '';
+  product: Product | null = null;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService
+  ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id !== null) {
-      this.productId = +id;
-      const product = this.productService.getProductById(this.productId);
-      if (product) {
-        this.product = product;
-      } else {
-        console.error("Product not found.");
-      }
+    this.loadProductDetails();
+  }
+
+  loadProductDetails(): void {
+    const id = this.route.snapshot.params['id'];
+    if (id) {
+      this.productService.getProductById(id).subscribe(
+        (product: Product) => {
+          this.product = product;
+        },
+        (error: any) => {
+          console.error(`Error fetching product with ID ${id}:`, error);
+          if (error.status === 404) {
+            // Handle 404 error - product not found
+            // For example, redirect to a product list page or display an error message
+            this.router.navigate(['/products']); // Example redirection
+          } else {
+            alert('Error fetching product. Please try again.');
+          }
+        }
+      );
     } else {
-      console.error("Product ID is missing from route parameters.");
+      console.error("Invalid product ID provided.");
     }
   }
 
-  onSubmit(): void {
-    if (this.product.name && this.product.price && this.product.imageUrl && this.product.description) {
-      this.productService.updateProduct(this.product);
-      this.router.navigate(['/']);
+
+  updateProduct(): void {
+    if (this.product) {
+      this.productService.updateProduct(this.product).subscribe(
+        () => {
+          console.log('Product updated successfully');
+          this.router.navigate(['/product', this.product?._id]);
+        },
+        (error: any) => {
+          console.error('Error updating product:', error);
+          alert('Error updating product. Please try again.');
+        }
+      );
     } else {
-      this.errorMessage = "Please fill in all fields before updating the product.";
+      console.error('Cannot update product: Product is null or undefined.');
     }
   }
 }

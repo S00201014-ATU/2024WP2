@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ProductAddComponent {
   newProduct: Product = {
-    _id: 0,
+    _id: '', // Initialize with an empty string or null
     name: '',
     price: 0,
     imageUrl: '',
@@ -22,10 +22,22 @@ export class ProductAddComponent {
 
   onSubmit(): void {
     if (this.newProduct.name && this.newProduct.price && this.newProduct.imageUrl && this.newProduct.description) {
-      this.productService.addProduct(this.newProduct);
-      this.router.navigate(['/']);
+      this.productService.addProduct(this.newProduct).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error('Error adding product:', err);
+          if (err.error && err.error.error) {
+            this.errorMessage = 'Error adding product: ' + err.error.error;
+          } else {
+            this.errorMessage = 'Error adding product. Please try again later.';
+          }
+        }
+      });
     } else {
       this.errorMessage = "Please fill in all fields before adding the product.";
     }
   }
+
 }

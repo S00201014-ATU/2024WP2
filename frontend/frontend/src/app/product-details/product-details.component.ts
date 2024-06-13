@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from './../services/product.service';
-import { Product } from './../models/product';
+import { ProductService } from '../services/product.service';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-product-details',
@@ -11,23 +11,27 @@ import { Product } from './../models/product';
 export class ProductDetailsComponent implements OnInit {
   product: Product | null = null;
 
-  constructor(
-    private route: ActivatedRoute,
-    private productService: ProductService
-  ) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id !== null) {
-      const productId = +id;
-      const foundProduct = this.productService.getProductById(productId);
-      if (foundProduct !== undefined) {
-        this.product = foundProduct;
-      } else {
-        console.error(`Product with ID ${productId} not found.`);
-      }
+    this.loadProductDetails();
+  }
+
+  loadProductDetails(): void {
+    const id = this.route.snapshot.params['id'];
+    if (id) {
+      console.log(`Fetching product details for ID: ${id}`);
+      this.productService.getProductById(id).subscribe(
+        (product: Product) => {
+          console.log('Product details fetched:', product);
+          this.product = product;
+        },
+        (error: any) => {
+          console.error('Error fetching product details:', error);
+        }
+      );
     } else {
-      console.error("Product ID is missing from route parameters.");
+      console.error("Invalid product ID provided.");
     }
   }
 }
