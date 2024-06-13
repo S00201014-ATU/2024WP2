@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Product } from '../models/product';
 
 @Injectable({
@@ -23,15 +23,11 @@ export class ProductService {
     return this.http.post<Product>(this.apiUrl, product);
   }
 
-  updateProduct(product: Product): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${product._id}`, product);
+  updateProduct(id: string, updatedProduct: Partial<Product>): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, updatedProduct);
   }
 
   deleteProduct(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    return throwError(error.message || 'Server Error');
   }
 }

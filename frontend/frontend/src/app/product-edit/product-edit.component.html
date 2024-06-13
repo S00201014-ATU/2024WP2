@@ -1,4 +1,4 @@
-<div *ngIf="product" class="edit-product">
+<div *ngIf="product">
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" [(ngModel)]="product.name">
 
@@ -12,4 +12,8 @@
   <textarea id="description" name="description" [(ngModel)]="product.description"></textarea>
 
   <button (click)="updateProduct()">Update Product</button>
+</div>
+
+<div *ngIf="!product">
+  <p>Error loading product details or product not found.</p>
 </div>

@@ -39,16 +39,12 @@ app.get('/products', async (req, res) => {
     }
 });
 
-app.get('/product/:id', async (req, res) => {
+app.get('/products/:id', async (req, res) => {
     try {
         const database = client.db('WP2Repeat2024');
         const collection = database.collection('products');
-
-        if (!ObjectId.isValid(req.params.id)) {
-            return res.status(400).json({ error: 'Invalid product ID format' });
-        }
-
-        const product = await collection.findOne({ _id: new ObjectId(req.params.id) });
+        console.log(req.params.id);
+        const product = await collection.findOne({ _id: new ObjectId(req.params.id) }); // Find by string ID
         if (!product) {
             return res.status(404).json({ error: 'Product not found' });
         }
@@ -64,7 +60,7 @@ app.post('/products', async (req, res) => {
     try {
         const database = client.db('WP2Repeat2024');
         const collection = database.collection('products');
-        
+
         const { _id, ...productData } = req.body;
 
         const result = await collection.insertOne(productData);
@@ -78,17 +74,31 @@ app.post('/products', async (req, res) => {
     }
 });
 
-
-
 app.put('/products/:id', async (req, res) => {
+    const { id } = req.params;
     try {
         const database = client.db('WP2Repeat2024');
         const collection = database.collection('products');
-        const result = await collection.updateOne({ _id: new ObjectId(req.params.id) }, { $set: req.body });
-        res.json({ message: 'Product updated successfully' });
+
+        const updatedProduct = req.body;
+        // Ensure _id is not included in the update payload
+        delete updatedProduct._id;
+
+        const result = await collection.findOneAndUpdate(
+            { _id: new ObjectId(id) }, // Filter
+            { $set: updatedProduct }, // Update
+            { returnOriginal: false } // Options: return updated document
+        );
+
+        const updatedDocument = result.value;
+        if (!updatedDocument) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+
+        res.json(updatedDocument);
     } catch (error) {
-        console.error('Error updating product by ID', error);
-        res.status(500).json({ error: 'Internal server error' });
+        console.error('Error updating product:', error);
+        res.status(500).json({ error: 'Error updating product' });
     }
 });
 
