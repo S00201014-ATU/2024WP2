@@ -6,7 +6,7 @@ import { Product } from '../models/product';
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
-  styleUrls: ['./product-edit.component.css']
+  styleUrl: './product-edit.component.css'
 })
 export class ProductEditComponent implements OnInit {
   product: Product | null = null;

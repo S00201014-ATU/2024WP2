@@ -1,19 +1,27 @@
-<div *ngIf="product">
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" [(ngModel)]="product.name">
+<div *ngIf="product" class="product-form-container">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="product.name">
+  </div>
 
-  <label for="price">Price:</label>
-  <input type="number" id="price" name="price" [(ngModel)]="product.price">
+  <div class="form-group">
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" [(ngModel)]="product.price">
+  </div>
 
-  <label for="imageUrl">Image URL:</label>
-  <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="product.imageUrl">
+  <div class="form-group">
+    <label for="imageUrl">Image URL:</label>
+    <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="product.imageUrl">
+  </div>
 
-  <label for="description">Description:</label>
-  <textarea id="description" name="description" [(ngModel)]="product.description"></textarea>
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" [(ngModel)]="product.description"></textarea>
+  </div>
 
-  <button (click)="updateProduct()">Update Product</button>
+  <button class="btn" (click)="updateProduct()">Update Product</button>
 </div>
 
-<div *ngIf="!product">
+<div *ngIf="!product" class="error-message">
   <p>Error loading product details or product not found.</p>
 </div>
