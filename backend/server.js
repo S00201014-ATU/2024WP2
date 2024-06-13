@@ -44,7 +44,6 @@ app.get('/product/:id', async (req, res) => {
         const database = client.db('WP2Repeat2024');
         const collection = database.collection('products');
 
-        // Validate product ID format
         if (!ObjectId.isValid(req.params.id)) {
             return res.status(400).json({ error: 'Invalid product ID format' });
         }
@@ -66,16 +65,12 @@ app.post('/products', async (req, res) => {
         const database = client.db('WP2Repeat2024');
         const collection = database.collection('products');
         
-        // Omit _id from req.body to allow MongoDB to generate it
         const { _id, ...productData } = req.body;
 
-        // Insert the new product
         const result = await collection.insertOne(productData);
 
-        // Fetch the newly created product including its generated _id
         const newProduct = await collection.findOne({ _id: result.insertedId });
 
-        // Return the newly created product
         res.json(newProduct);
     } catch (error) {
         console.error('Error creating product', error);

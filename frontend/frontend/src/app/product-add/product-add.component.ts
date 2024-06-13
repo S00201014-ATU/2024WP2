@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ProductAddComponent {
   newProduct: Product = {
-    _id: '', // Initialize with an empty string or null
+    _id: '',
     name: '',
     price: 0,
     imageUrl: '',

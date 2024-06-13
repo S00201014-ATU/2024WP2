@@ -31,9 +31,7 @@ export class ProductEditComponent implements OnInit {
         (error: any) => {
           console.error(`Error fetching product with ID ${id}:`, error);
           if (error.status === 404) {
-            // Handle 404 error - product not found
-            // For example, redirect to a product list page or display an error message
-            this.router.navigate(['/products']); // Example redirection
+            this.router.navigate(['/products']);
           } else {
             alert('Error fetching product. Please try again.');
           }

@@ -32,7 +32,6 @@ export class ProductService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    // Handle the error appropriately here
     return throwError(error.message || 'Server Error');
   }
 }
