@@ -2,11 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { MongoClient, ObjectId } = require('mongodb');
+require('dotenv').config(); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const uri = "mongodb+srv://Matthew902:Manu1234@wp2repeat2024.bmdxgib.mongodb.net/?retryWrites=true&w=majority&appName=WP2Repeat2024";
+const uri = process.env.MONGODB_URI;  
 const client = new MongoClient(uri);
 
 async function connect() {
@@ -44,7 +45,7 @@ app.get('/products/:id', async (req, res) => {
         const database = client.db('WP2Repeat2024');
         const collection = database.collection('products');
         console.log(req.params.id);
-        const product = await collection.findOne({ _id: new ObjectId(req.params.id) }); // Find by string ID
+        const product = await collection.findOne({ _id: new ObjectId(req.params.id) }); 
         if (!product) {
             return res.status(404).json({ error: 'Product not found' });
         }
@@ -81,13 +82,13 @@ app.put('/products/:id', async (req, res) => {
         const collection = database.collection('products');
 
         const updatedProduct = req.body;
-        // Ensure _id is not included in the update payload
+        
         delete updatedProduct._id;
 
         const result = await collection.findOneAndUpdate(
-            { _id: new ObjectId(id) }, // Filter
-            { $set: updatedProduct }, // Update
-            { returnOriginal: false } // Options: return updated document
+            { _id: new ObjectId(id) },
+            { $set: updatedProduct }, 
+            { returnOriginal: false } 
         );
 
         const updatedDocument = result.value;
