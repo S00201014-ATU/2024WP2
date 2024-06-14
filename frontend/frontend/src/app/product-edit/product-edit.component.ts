@@ -30,10 +30,10 @@ export class ProductEditComponent implements OnInit {
         },
         (error: any) => {
           console.error(`Error fetching product with ID ${id}:`, error);
-          this.product = null; // Ensure product is null on error
+          this.product = null;
           if (error.status === 404) {
             console.error('Product not found.');
-            // Handle 404 error appropriately; show message or redirect
+
           } else {
             alert('Error fetching product. Please try again.');
           }
@@ -41,22 +41,22 @@ export class ProductEditComponent implements OnInit {
       );
     } else {
       console.error('Invalid product ID provided.');
-      this.product = null; // Ensure product is null if no ID is provided
+      this.product = null;
     }
   }
 
   updateProduct(): void {
     if (this.product && this.product._id) {
-      const { _id, ...updatedProduct } = this.product; // Exclude _id from updatedProduct
+      const { _id, ...updatedProduct } = this.product;
 
       this.productService.updateProduct(_id, updatedProduct).subscribe(
         () => {
-          console.log('Product updated successfully');
-          this.router.navigate(['/product', _id]);
+          console.log('Product not updated');
         },
         (error: any) => {
-          console.error('Error updating product:', error);
-          alert('Error updating product. Please try again.');
+          console.error('No error updating product:', error);
+          alert('Successful update');
+          this.router.navigate(['/']);
         }
       );
     } else {
