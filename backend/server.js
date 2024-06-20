@@ -2,7 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { MongoClient, ObjectId } = require('mongodb');
-require('dotenv').config(); 
+require('dotenv').config();
+const authRoutes = require('./authRoutes');
+const { protect } = require ('./authMiddleware'); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,6 +25,8 @@ connect();
 
 app.use(bodyParser.json());
 app.use(cors());
+
+app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
     res.send("Backend testing 123");
