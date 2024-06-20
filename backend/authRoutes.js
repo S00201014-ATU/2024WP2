@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const User = require('../backend/user');
+const User = require('./user');
 
 const router = express.Router();
 const secret = process.env.JWT_SECRET;
