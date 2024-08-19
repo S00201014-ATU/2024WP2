@@ -1,24 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from '../models/product';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   filteredProducts: Product[] = [];
-  originalProducts: Product[] = []; // Store the original order of products
+  originalProducts: Product[] = [];
   searchTerm: string = '';
   selectedFilter: string = 'default';
+  userIsAuthenticated: boolean = false;
+  private authSubscription!: Subscription;
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private authService: AuthService // Inject AuthService
+  ) {}
 
   ngOnInit(): void {
     this.loadProducts();
+
+    // Subscribe to authentication status changes
+    this.authSubscription = this.authService.getAuthStatus().subscribe(isAuthenticated => {
+      this.userIsAuthenticated = isAuthenticated;
+      console.log('Authentication status changed:', isAuthenticated);  // Log for debugging
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();  // Clean up the subscription
+    }
   }
 
   loadProducts(): void {
@@ -40,7 +60,7 @@ export class ProductListComponent implements OnInit {
   deleteProduct(productId: string): void {
     if (confirm('Are you sure you want to delete this product from the store?')) {
       this.productService.deleteProduct(productId).subscribe(() => {
-        this.loadProducts();
+        this.loadProducts(); // Reload products after deletion
       }, error => {
         console.error('Error deleting product:', error);
         alert('Error deleting product. Please try again.');

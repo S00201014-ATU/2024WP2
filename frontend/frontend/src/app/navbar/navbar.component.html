@@ -6,8 +6,9 @@
   </div>
   <div class="navbar-links">
     <a routerLink="/">Kits</a>
-    <a routerLink="/add-product">Add Kit</a>
-    <!-- Dynamically show Login or Logout based on authentication status -->
+    <!-- Only show "Add Kit" if the user is logged in -->
+    <a *ngIf="isAuthenticated()" routerLink="/add-product">Add Kit</a>
+    <!-- Show Login or Logout based on authentication status -->
     <a *ngIf="!isAuthenticated()" routerLink="/login">Login</a>
     <a *ngIf="isAuthenticated()" (click)="logout()">Logout</a>
   </div>
