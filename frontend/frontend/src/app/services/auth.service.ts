@@ -8,14 +8,29 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = 'http://localhost:3000/auth';
 
-  constructor(private htttp:HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   register(username: string, password: string): Observable<any> {
-    return this.htttp.post(`${this.apiUrl}/register`, { username, password });
+    return this.http.post(`${this.apiUrl}/register`, { username, password });
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.htttp.post(`${this.apiUrl}/login`, { username, password });
+    return this.http.post(`${this.apiUrl}/login`, { username, password });
   }
 
+  setToken(token: string): void {
+    localStorage.setItem('authToken', token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
+
+  logout(): void {
+    localStorage.removeItem('authToken');
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
 }

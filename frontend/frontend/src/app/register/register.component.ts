@@ -12,17 +12,31 @@ export class RegisterComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private authService:AuthService, private router:Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  register(){
+  register() {
+    // Basic validation to check if both fields are filled
+    if (!this.username || !this.password) {
+      alert('Please fill out both the username and password fields.');
+      return;
+    }
+
+    // Call the AuthService to register the new user
     this.authService.register(this.username, this.password).subscribe(
       res => {
         alert('Registration successful');
+        // Navigate to the login page after successful registration
         this.router.navigate(['/login']);
       },
       err => {
-        console.error('Error registering', err);
-        alert('Registration failed');
+        console.error('Error registering:', err);
+
+        // Provide more specific error messaging
+        if (err.status === 400) {
+          alert('Username already taken. Please choose another.');
+        } else {
+          alert('Registration failed. Please try again later.');
+        }
       }
     );
   }
