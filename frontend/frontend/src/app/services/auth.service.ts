@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
+import { Router } from '@angular/router';  // Import Router
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000/auth';
   private authStatus = new BehaviorSubject<boolean>(this.isAuthenticated());  // BehaviorSubject to track auth status
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}  // Inject Router
 
   // Observable for components to subscribe to
   getAuthStatus(): Observable<boolean> {
@@ -29,9 +30,22 @@ export class AuthService {
           if (response && response.token) {
             this.setToken(response.token);
             this.authStatus.next(true);  // Notify subscribers of the login
+            console.log("User logged in, token stored");
+            alert("Login successful!");  // Show alert message to the user
+            this.router.navigate(['/products']);  // Redirect to product list
           }
         })
       );
+  }
+
+  // Logout user and remove token from localStorage
+  logout(): void {
+    console.log("Logout function called");  // Debugging log
+    localStorage.removeItem('authToken');
+    this.authStatus.next(false);  // Notify subscribers of the logout
+    alert("You have been logged out.");  // Show alert when user logs out
+    console.log("User logged out, token removed");
+    this.router.navigate(['/login']);  // Redirect to the login page after logout
   }
 
   // Store token in localStorage
@@ -42,12 +56,6 @@ export class AuthService {
   // Retrieve token from localStorage
   getToken(): string | null {
     return localStorage.getItem('authToken');
-  }
-
-  // Logout user and remove token from localStorage
-  logout(): void {
-    localStorage.removeItem('authToken');
-    this.authStatus.next(false);  // Notify subscribers of the logout
   }
 
   // Check if the user is authenticated
