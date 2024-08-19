@@ -48,7 +48,7 @@ app.get('/products/:id', async (req, res) => {
     try {
         const database = client.db('WP2Repeat2024');
         const collection = database.collection('products');
-        console.log(req.params.id);
+        // console.log(req.params.id);
         const product = await collection.findOne({ _id: new ObjectId(req.params.id) }); 
         if (!product) {
             return res.status(404).json({ error: 'Product not found' });
