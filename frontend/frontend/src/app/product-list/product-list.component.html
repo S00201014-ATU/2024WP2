@@ -1,6 +1,19 @@
-<div class="search-bar">
-  <input type="text" placeholder="Search products..." [(ngModel)]="searchTerm" class="search-input">
-  <button (click)="filterProducts()" class="search-button">Search</button>
+<div class="search-filter-container">
+  <div class="search-bar">
+    <input type="text" placeholder="Search products..." [(ngModel)]="searchTerm" class="search-input">
+    <button (click)="filterProducts()" class="search-button">Search</button>
+  </div>
+
+  <div class="filter-bar">
+    <label for="filter">Sort By:</label>
+    <select id="filter" [(ngModel)]="selectedFilter" (change)="applyFilter()">
+      <option value="default">Default</option>
+      <option value="az">A-Z</option>
+      <option value="za">Z-A</option>
+      <option value="priceHighLow">Price: High to Low</option>
+      <option value="priceLowHigh">Price: Low to High</option>
+    </select>
+  </div>
 </div>
 
 <div *ngIf="filteredProducts.length === 0" class="no-results">
