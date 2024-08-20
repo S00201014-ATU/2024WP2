@@ -4,63 +4,57 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const { MongoClient, ObjectId } = require('mongodb');
 require('dotenv').config();
-const authRoutes = require('./authRoutes'); // Auth routes for handling user registration/login
-const { protect } = require('./authMiddleware'); // Auth middleware for protected routes
+const authRoutes = require('./authRoutes'); 
+const { protect } = require('./authMiddleware'); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// MongoDB Connection URI from the environment
+// MongoDB Connection URI from environment variables
 const uri = process.env.MONGODB_URI;
 
-// Mongoose connection setup (for user authentication and schema-based operations)
+// Setup Mongoose connection (used for user-related operations)
 async function connectToMongoose() {
     try {
-        await mongoose.connect(uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        console.log('Connected to MongoDB via Mongoose');
+        await mongoose.connect(uri, {});
+        console.log('Connected to MongoDB via Mongoose for user-related operations');
     } catch (error) {
         console.error('Error connecting to MongoDB via Mongoose:', error);
-        process.exit(1); // Exit process if MongoDB connection fails
+        process.exit(1); // Exit if connection fails
     }
 }
 
-// MongoClient setup for direct database manipulation (e.g., products)
-const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-
+// Setup MongoClient connection (used for product-related operations)
+const client = new MongoClient(uri, {});
 let database;
 
-// MongoClient connection
+// Connect to MongoDB using MongoClient
 async function connectToMongoClient() {
     try {
         await client.connect();
         database = client.db('WP2Repeat2024');
-        console.log('Connected to MongoDB via MongoClient');
+        console.log('Connected to MongoDB via MongoClient for product-related operations');
     } catch (error) {
         console.error('Error connecting to MongoDB via MongoClient:', error);
-        process.exit(1); // Exit process if MongoDB connection fails
+        process.exit(1); // Exit if connection fails
     }
 }
 
-// Connect to Mongoose and MongoClient
+// Connect to both Mongoose and MongoClient
 connectToMongoose();
 connectToMongoClient();
 
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use('/auth', authRoutes); // Routes for user registration and authentication
+app.use('/auth', authRoutes); // Routes for user authentication
 
+// Simple route for testing server
 app.get('/', (req, res) => {
     res.send("Backend testing 123");
 });
 
-// Middleware to check if MongoClient's database is connected before handling product-related requests
+// Middleware to ensure database is connected before handling product-related requests
 app.use((req, res, next) => {
     if (!database) {
         return res.status(500).json({ error: 'Database not connected' });
@@ -69,7 +63,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Get all products
+// Get all products from the database
 app.get('/products', async (req, res) => {
     try {
         const collection = req.db.collection('products');
@@ -81,7 +75,7 @@ app.get('/products', async (req, res) => {
     }
 });
 
-// Get a single product by ID
+// Get a specific product by its ID
 app.get('/products/:id', async (req, res) => {
     try {
         const collection = req.db.collection('products');
@@ -96,7 +90,7 @@ app.get('/products/:id', async (req, res) => {
     }
 });
 
-// Create a new product
+// Create a new product in the database
 app.post('/products', async (req, res) => {
     try {
         const collection = req.db.collection('products');
@@ -112,14 +106,14 @@ app.post('/products', async (req, res) => {
     }
 });
 
-// Update an existing product by ID
+// Update an existing product by its ID
 app.put('/products/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const collection = req.db.collection('products');
         const updatedProduct = req.body;
         
-        delete updatedProduct._id; // Remove _id from the request body
+        delete updatedProduct._id; // Remove _id to avoid conflicts
 
         const result = await collection.findOneAndUpdate(
             { _id: new ObjectId(id) },
@@ -139,7 +133,7 @@ app.put('/products/:id', async (req, res) => {
     }
 });
 
-// Delete a product by ID
+// Delete a product by its ID
 app.delete('/products/:id', async (req, res) => {
     try {
         const collection = req.db.collection('products');
@@ -154,12 +148,12 @@ app.delete('/products/:id', async (req, res) => {
     }
 });
 
-// Start the server after the database connections are established
+// Start the server and listen on the defined port
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-// Gracefully shutdown the server and close MongoDB connections
+// Handle server shutdown and close MongoDB connections
 process.on('SIGINT', async () => {
     console.log('Shutting down server...');
     try {
