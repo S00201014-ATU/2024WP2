@@ -1,27 +1,35 @@
+<!-- Container for the product form, shown if the product object exists -->
 <div *ngIf="product" class="product-form-container">
+
+  <!-- Form group for the product name -->
   <div class="form-group">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" [(ngModel)]="product.name">
   </div>
 
+  <!-- Form group for the product price -->
   <div class="form-group">
     <label for="price">Price:</label>
     <input type="number" id="price" name="price" [(ngModel)]="product.price">
   </div>
 
+  <!-- Form group for the product image URL -->
   <div class="form-group">
     <label for="imageUrl">Image URL:</label>
     <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="product.imageUrl">
   </div>
 
+  <!-- Form group for the product description -->
   <div class="form-group">
     <label for="description">Description:</label>
     <textarea id="description" name="description" [(ngModel)]="product.description"></textarea>
   </div>
 
+  <!-- Button to update the product -->
   <button class="btn" (click)="updateProduct()">Update Product</button>
 </div>
 
+<!-- Error message displayed if the product object does not exist -->
 <div *ngIf="!product" class="error-message">
   <p>Error loading product details or product not found.</p>
 </div>
