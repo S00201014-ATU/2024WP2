@@ -17,6 +17,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   searchTerm: string = ''; // Search term for filtering products
   selectedFilter: string = 'default'; // Selected filter option
   userIsAuthenticated: boolean = false; // User authentication status
+  searchCompleted: boolean = false; // Flag to indicate when a search has been completed
   private authSubscription!: Subscription; // Subscription to auth status changes
 
   constructor(
@@ -69,14 +70,24 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   filterProducts(): void {
+    this.searchCompleted = true;  // Mark search as completed
+    console.log('Search button clicked, filtering products with searchTerm:', this.searchTerm);
+
     if (this.searchTerm) {
-      this.filteredProducts = this.products.filter(product =>
-        product.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()) // Filter products by search term
-      );
+        this.filteredProducts = this.products.filter(product =>
+            product.name.toLowerCase().startsWith(this.searchTerm.toLowerCase())
+        );
     } else {
-      this.filteredProducts = [...this.products]; // Show all products if no search term
+        this.filteredProducts = this.products;
     }
-    this.applyFilter(); // Apply selected filter
+
+    console.log('Filtered products:', this.filteredProducts);
+  }
+
+  // Reset the searchCompleted flag and show all products when the user starts typing in the search bar
+  onSearchInputChange(): void {
+    this.searchCompleted = false;
+    this.filteredProducts = this.products;  // Reset filteredProducts to show all products
   }
 
   applyFilter(): void {

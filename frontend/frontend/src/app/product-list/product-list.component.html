@@ -1,10 +1,7 @@
-<!-- Container for the search bar and filter options -->
 <div class="search-filter-container">
   <!-- Search bar with input field and search button -->
   <div class="search-bar">
-    <!-- Input field for searching products -->
-    <input type="text" placeholder="Search products..." [(ngModel)]="searchTerm" class="search-input">
-    <!-- Button to trigger the search function -->
+    <input type="text" placeholder="Search products..." [(ngModel)]="searchTerm" (input)="onSearchInputChange()" class="search-input">
     <button (click)="filterProducts()" class="search-button">Search</button>
   </div>
 
@@ -23,8 +20,8 @@
   </div>
 </div>
 
-<!-- Message displayed when no products match the search -->
-<div *ngIf="filteredProducts.length === 0" class="no-results">
+<!-- Message displayed when no products match the search and search has been completed -->
+<div *ngIf="filteredProducts.length === 0 && searchCompleted" class="no-results">
   No products match your search of "{{searchTerm}}".
 </div>
 
