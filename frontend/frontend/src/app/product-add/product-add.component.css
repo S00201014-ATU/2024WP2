@@ -1,42 +1,48 @@
+/* Style for the product add form container */
 .product-add-form {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  max-width: 500px; /* Set a maximum width for the form */
+  margin: 0 auto; /* Centre the form on the page */
+  padding: 20px; /* Padding inside the form */
+  background-color: #fff; /* White background for the form */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for a lifted effect */
 }
 
+/* Style for input fields and text areas */
 .input-field, .textarea-field {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  width: 100%; /* Make fields full width */
+  padding: 10px; /* Padding inside the fields */
+  margin: 5px 0; /* Margin between fields */
+  border: 1px solid #ccc; /* Border around the fields */
+  border-radius: 4px; /* Slightly rounded corners */
+  box-sizing: border-box; /* Ensure padding and border are included in width/height */
 }
 
+/* Specific style for text areas */
 .textarea-field {
-  height: 100px;
+  height: 100px; /* Set height for the text area */
 }
 
+/* Style for the add button */
 .add-button {
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  padding: 10px 20px; /* Padding inside the button */
+  background-color: #28a745; /* Green background colour */
+  color: #fff; /* White text */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Show pointer cursor on hover */
+  font-size: 1rem; /* Font size for the button */
+  transition: background-color 0.3s ease; /* Smooth background colour transition on hover */
 }
 
+/* Hover effect for the add button */
 .add-button:hover {
-  background-color: #218838;
+  background-color: #218838; /* Darker green on hover */
 }
 
+/* Style for error messages */
 .error-message {
-  color: red;
-  margin-bottom: 10px;
-  font-weight: bold;
+  color: red; /* Red colour for error text */
+  margin-bottom: 10px; /* Space below error message */
+  font-weight: bold; /* Bold font for emphasis */
 }
