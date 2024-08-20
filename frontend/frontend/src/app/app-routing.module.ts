@@ -6,6 +6,7 @@ import { ProductAddComponent } from './product-add/product-add.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -15,16 +16,19 @@ const routes: Routes = [
     path: 'products/:id', component: ProductDetailsComponent  // Route for viewing product details by ID
   },
   {
-    path: 'edit-product/:id', component: ProductEditComponent  // Route for editing a product by ID
+    path: 'edit-product/:id', component: ProductEditComponent, canActivate:[AuthGuard]  // Route for editing a product by ID
   },
   {
-    path: 'add-product', component: ProductAddComponent  // Route for adding a new product
+    path: 'add-product', component: ProductAddComponent,  canActivate:[AuthGuard]  // Route for adding a new product
   },
   {
     path: 'login', component: LoginComponent  // Route for user login
   },
   {
     path: 'register', component: RegisterComponent  // Route for user registration
+  },
+  {
+    path: '**', redirectTo: ''
   }
 ];
 

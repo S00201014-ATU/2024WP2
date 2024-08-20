@@ -2,64 +2,69 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { Product } from '../models/product';
+import { AuthService } from '../services/auth.service'; // Import AuthService
 
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
-  styleUrls: ['./product-edit.component.css']
+  styleUrl: './product-edit.component.css'
 })
 export class ProductEditComponent implements OnInit {
   product: Product | null = null;
 
   constructor(
-    private route: ActivatedRoute, // Provides access to route parameters
-    private router: Router, // Used to navigate programmatically
-    private productService: ProductService // Service for product-related API calls
+    private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService,
+    private authService: AuthService // Inject AuthService
   ) { }
 
   ngOnInit(): void {
-    this.loadProductDetails(); // Load product details on component initialisation
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login']); // Redirect if not authenticated
+    } else {
+      this.loadProductDetails();
+    }
   }
 
   loadProductDetails(): void {
-    const id = this.route.snapshot.params['id']; // Retrieve the product ID from the route parameters
+    const id = this.route.snapshot.params['id'];
     if (id) {
       this.productService.getProductById(id).subscribe(
         (product: Product) => {
-          this.product = product; // Assign fetched product details to the component property
+          this.product = product;
         },
         (error: any) => {
           console.error(`Error fetching product with ID ${id}:`, error);
-          this.product = null; // Clear product details if an error occurs
+          this.product = null;
           if (error.status === 404) {
-            console.error('Product not found.'); // Handle case where the product was not found
+            console.error('Product not found.');
           } else {
-            alert('Error fetching product. Please try again.'); // Notify user of other errors
+            alert('Error fetching product. Please try again.');
           }
         }
       );
     } else {
-      console.error('Invalid product ID provided.'); // Log error if no valid ID is provided
+      console.error('Invalid product ID provided.');
       this.product = null;
     }
   }
 
   updateProduct(): void {
-    if (this.product && this.product._id) { // Check if product and its ID are valid
-      const { _id, ...updatedProduct } = this.product; // Destructure to exclude _id from the update payload
-
+    if (this.product && this.product._id) {
+      const { _id, ...updatedProduct } = this.product;
       this.productService.updateProduct(_id, updatedProduct).subscribe(
         () => {
-          console.log('Product not updated'); // Log successful update
+          alert('Product updated successfully.');
+          this.router.navigate(['/']);
         },
         (error: any) => {
-          console.error('No error updating product:', error);
-          alert('Successful update'); // Notify user of successful update
-          this.router.navigate(['/']); // Redirect to home or list view after successful update
+          console.error('Error updating product:', error);
+          alert('Error updating product. Please try again.');
         }
       );
     } else {
-      console.error('Cannot update product: Product or product._id is null or undefined.'); // Log error if product details are missing
+      console.error('Cannot update product: Product or product._id is null or undefined.');
     }
   }
 }

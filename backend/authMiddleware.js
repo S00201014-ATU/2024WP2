@@ -10,9 +10,9 @@ const protect = (req, res, next) => {
         token = req.headers.authorization.split(' ')[1];
     }
 
-    // If no token is found, respond with a 401 error (Not authorised)
+    // If no token is found, respond with a 401 error (Not authorized)
     if (!token) {
-        return res.status(401).json({error: 'Not authorised, no token'});
+        return res.status(401).json({ error: 'Not authorised, no token' });
     }
 
     try {
@@ -22,7 +22,7 @@ const protect = (req, res, next) => {
         next();  // Move to the next middleware or route handler
     } catch (error) {
         // If token verification fails, respond with a 401 error (Not authorised)
-        res.status(401).json({error: 'Not authorised, token failed'});
+        res.status(401).json({ error: 'Not authorised, token failed' });
     }
 };
 
