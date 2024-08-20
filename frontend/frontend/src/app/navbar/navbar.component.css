@@ -1,35 +1,41 @@
+/* Styles for the navbar */
 .navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-  background-color: #616569;
-  color: #fff;
+  justify-content: space-between; /* Space between brand and links */
+  align-items: center; /* Center items vertically */
+  padding: 15px 30px; /* Padding around the navbar */
+  background-color: #616569; /* Background colour of the navbar */
+  color: #fff; /* Text colour of the navbar */
 }
 
+/* Styles for the brand section of the navbar */
 .navbar-brand a {
   display: flex;
-  align-items: center;
-  text-decoration: none;
+  align-items: center; /* Center logo and text vertically */
+  text-decoration: none; /* Remove underline from links */
 }
 
+/* Size of the navbar logo */
 .navbar-logo {
   height: 40px;
 }
 
+/* Styles for the navbar links container */
 .navbar-links {
   display: flex;
-  gap: 20px;
+  gap: 20px; /* Space between the links */
 }
 
+/* Styles for individual links in the navbar */
 .navbar-links a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-  cursor: pointer;
+  color: #fff; /* Link text colour */
+  text-decoration: none; /* Remove underline from links */
+  font-size: 1rem; /* Font size for links */
+  transition: color 0.3s ease; /* Smooth colour transition on hover */
+  cursor: pointer; /* Pointer cursor on hover */
 }
 
+/* Hover effect for the links */
 .navbar-links a:hover {
-  color: #000;
+  color: #000; /* Change link colour on hover */
 }

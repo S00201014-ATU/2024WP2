@@ -1,14 +1,21 @@
 <nav class="navbar">
+  <!-- Navbar brand section with a link to the homepage -->
   <div class="navbar-brand">
     <a routerLink="/">
+      <!-- Logo image for the shop -->
       <img src="https://cdn-icons-png.flaticon.com/512/1031/1031497.png" alt="Shop Logo" class="navbar-logo">
     </a>
   </div>
+
+  <!-- Navbar links section -->
   <div class="navbar-links">
+    <!-- Link to the Kits page -->
     <a routerLink="/">Kits</a>
-    <!-- Only show "Add Kit" if the user is logged in -->
+
+    <!-- Only display the "Add Kit" link if the user is logged in -->
     <a *ngIf="isAuthenticated()" routerLink="/add-product">Add Kit</a>
-    <!-- Show Login or Logout based on authentication status -->
+
+    <!-- Show Login link if the user is not logged in, otherwise show Logout -->
     <a *ngIf="!isAuthenticated()" routerLink="/login">Login</a>
     <a *ngIf="isAuthenticated()" (click)="logout()">Logout</a>
   </div>
