@@ -1,86 +1,86 @@
 /* Container for the authentication form */
 .auth-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f2f5;
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Centre items horizontally */
+  align-items: center; /* Centre items vertically */
+  height: 100vh; /* Full viewport height */
+  background-color: #f0f2f5; /* Light grey background */
 }
 
 /* Card for the form */
 .auth-card {
-  background-color: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+  background-color: white; /* White background for the card */
+  padding: 40px; /* Space inside the card */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Shadow effect for depth */
+  width: 100%; /* Full width of the parent container */
+  max-width: 400px; /* Maximum width of the card */
 }
 
 /* Title of the form */
 .auth-title {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 24px;
-  color: #333;
+  text-align: center; /* Centre the title text */
+  margin-bottom: 30px; /* Space below the title */
+  font-size: 24px; /* Font size for the title */
+  color: #333; /* Dark grey text colour */
 }
 
 /* Form group container */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Space below each form group */
 }
 
 /* Label styling */
 .form-group label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: #555;
+  display: block; /* Make label a block element */
+  font-size: 14px; /* Font size for labels */
+  margin-bottom: 8px; /* Space below the label */
+  color: #555; /* Medium grey text colour */
 }
 
 /* Input styling */
 .form-group input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  transition: border-color 0.3s ease;
+  width: 100%; /* Full width of the form group */
+  padding: 12px; /* Space inside the input field */
+  font-size: 16px; /* Font size for input text */
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 5px; /* Rounded corners for the input */
+  transition: border-color 0.3s ease; /* Smooth border colour change */
 }
 
 .form-group input:focus {
-  border-color: #007bff;
-  outline: none;
+  border-color: #007bff; /* Blue border on focus */
+  outline: none; /* Remove default outline */
 }
 
 /* Submit button styling */
 .auth-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  width: 100%; /* Full width of the form group */
+  padding: 12px; /* Space inside the button */
+  background-color: #007bff; /* Blue background colour */
+  color: white; /* White text colour */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size for button text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background colour change */
 }
 
 .auth-button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
 /* Switch to login link */
 .auth-switch {
-  text-align: center;
-  margin-top: 20px;
+  text-align: center; /* Centre the switch link */
+  margin-top: 20px; /* Space above the switch link */
 }
 
 .auth-switch a {
-  color: #007bff;
-  text-decoration: none;
+  color: #007bff; /* Blue text colour */
+  text-decoration: none; /* Remove underline from link */
 }
 
 .auth-switch a:hover {
-  text-decoration: underline;
+  text-decoration: underline; /* Underline on hover */
 }

@@ -5,37 +5,36 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css'] // Corrected from styleUrl to styleUrls
 })
 export class RegisterComponent {
 
-  username: string = '';
-  password: string = '';
+  username: string = ''; // Stores the username input
+  password: string = ''; // Stores the password input
 
   constructor(private authService: AuthService, private router: Router) {}
 
   register() {
-    // Basic validation to check if both fields are filled
+    // Check if both username and password fields are filled
     if (!this.username || !this.password) {
-      alert('Please fill out both the username and password fields.');
+      alert('Please fill out both the username and password fields.'); // Alert if fields are empty
       return;
     }
 
-    // Call the AuthService to register the new user
+    // Call AuthService to register the new user
     this.authService.register(this.username, this.password).subscribe(
       res => {
-        alert('Registration successful');
-        // Navigate to the login page after successful registration
-        this.router.navigate(['/login']);
+        alert('Registration successful'); // Alert on successful registration
+        this.router.navigate(['/login']); // Navigate to login page after registration
       },
       err => {
-        console.error('Error registering:', err);
+        console.error('Error registering:', err); // Log any registration errors
 
-        // Provide more specific error messaging
+        // Provide specific error messages based on the error status
         if (err.status === 400) {
-          alert('Username already taken. Please choose another.');
+          alert('Username already taken. Please choose another.'); // Alert if username is already taken
         } else {
-          alert('Registration failed. Please try again later.');
+          alert('Registration failed. Please try again later.'); // General alert for other errors
         }
       }
     );
