@@ -1,6 +1,14 @@
+<!-- Display product details if the product exists -->
 <div *ngIf="product" class="product-details">
+  <!-- Product image with dynamic source and alt text -->
   <img [src]="product.imageUrl" alt="{{product.name}}" class="product-image">
+
+  <!-- Product name -->
   <h2 class="product-name">{{product.name}}</h2>
+
+  <!-- Product price with Euro symbol -->
   <p class="product-price">€{{product.price}}</p>
+
+  <!-- Product description -->
   <p class="product-description">{{product.description}}</p>
 </div>

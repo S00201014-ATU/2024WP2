@@ -1,31 +1,36 @@
+/* Style for the product details container */
 .product-details {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-top: 10px;
+  max-width: 600px; /* Maximum width for the product details section */
+  margin: 0 auto; /* Centre the section on the page */
+  padding: 20px; /* Padding inside the section */
+  background-color: #fff; /* White background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+  margin-top: 10px; /* Space above the section */
 }
 
+/* Style for the product image */
 .product-image {
-  width: 100%;
-  max-height: 400px;
-  object-fit: fill;
-  border-radius: 8px;
+  width: 100%; /* Full width of the container */
+  max-height: 400px; /* Maximum height of the image */
+  object-fit: fill; /* Ensure the image fills the container without maintaining aspect ratio */
+  border-radius: 8px; /* Rounded corners for the image */
 }
 
+/* Style for the product name */
 .product-name {
-  font-size: 1.8rem;
-  margin-top: 20px;
+  font-size: 1.8rem; /* Large font size for the product name */
+  margin-top: 20px; /* Space above the name */
 }
 
+/* Style for the product price */
 .product-price {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-size: 1.2rem; /* Medium font size for the price */
+  margin-bottom: 10px; /* Space below the price */
 }
 
+/* Style for the product description */
 .product-description {
-  font-size: 1.1rem;
-  line-height: 1.5;
+  font-size: 1.1rem; /* Slightly smaller font for the description */
+  line-height: 1.5; /* Increased line height for readability */
 }

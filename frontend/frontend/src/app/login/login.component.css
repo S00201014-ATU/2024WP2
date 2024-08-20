@@ -1,90 +1,90 @@
-/* Center the authentication form in the middle of the page */
+/* Centre the authentication form in the middle of the page */
 .auth-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f2f5;
+  justify-content: center; /* Centre horizontally */
+  align-items: center; /* Centre vertically */
+  height: 100vh; /* Full height of the viewport */
+  background-color: #f0f2f5; /* Light background colour */
 }
 
 /* Style for the form card */
 .auth-card {
-  background-color: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+  background-color: white; /* White background for the form */
+  padding: 40px; /* Space inside the card */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  width: 100%; /* Full width of the container */
+  max-width: 400px; /* Maximum width for the form */
 }
 
 /* Style for the form title */
 .auth-title {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 24px;
-  color: #333;
+  text-align: center; /* Centre the title */
+  margin-bottom: 30px; /* Space below the title */
+  font-size: 24px; /* Font size for the title */
+  color: #333; /* Dark text colour */
 }
 
 /* Container for each form input group */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Space between form fields */
 }
 
 /* Style for the labels of form fields */
 .form-group label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: #555;
+  display: block; /* Display label on its own line */
+  font-size: 14px; /* Font size for the label */
+  margin-bottom: 8px; /* Space below the label */
+  color: #555; /* Medium grey text colour */
 }
 
 /* Style for the input fields */
 .form-group input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  transition: border-color 0.3s ease;
+  width: 100%; /* Full width of the container */
+  padding: 12px; /* Space inside the input fields */
+  font-size: 16px; /* Font size for input text */
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 5px; /* Rounded corners for input fields */
+  transition: border-color 0.3s ease; /* Smooth border colour transition */
 }
 
 /* Input field style when focused */
 .form-group input:focus {
-  border-color: #007bff;
-  outline: none;
+  border-color: #007bff; /* Change border colour to blue when focused */
+  outline: none; /* Remove default outline */
 }
 
 /* Style for the submit button */
 .auth-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  width: 100%; /* Full width of the container */
+  padding: 12px; /* Space inside the button */
+  background-color: #007bff; /* Blue background colour */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size for button text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background colour transition */
 }
 
 /* Submit button hover effect */
 .auth-button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
 /* Style for the link to switch between login and registration */
 .auth-switch {
-  text-align: center;
-  margin-top: 20px;
+  text-align: center; /* Centre the text */
+  margin-top: 20px; /* Space above the text */
 }
 
 /* Style for the link inside the switch section */
 .auth-switch a {
-  color: #007bff;
-  text-decoration: none;
+  color: #007bff; /* Blue link text */
+  text-decoration: none; /* Remove underline from links */
 }
 
 /* Hover effect for the switch link */
 .auth-switch a:hover {
-  text-decoration: underline;
+  text-decoration: underline; /* Add underline on hover */
 }
