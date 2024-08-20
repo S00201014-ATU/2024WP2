@@ -1,11 +1,18 @@
+<!-- Container for the search bar and filter options -->
 <div class="search-filter-container">
+  <!-- Search bar with input field and search button -->
   <div class="search-bar">
+    <!-- Input field for searching products -->
     <input type="text" placeholder="Search products..." [(ngModel)]="searchTerm" class="search-input">
+    <!-- Button to trigger the search function -->
     <button (click)="filterProducts()" class="search-button">Search</button>
   </div>
 
+  <!-- Filter options for sorting products -->
   <div class="filter-bar">
+    <!-- Label for the sort by dropdown -->
     <label for="filter">Sort By:</label>
+    <!-- Dropdown menu for selecting sort option -->
     <select id="filter" [(ngModel)]="selectedFilter" (change)="applyFilter()">
       <option value="default">Default</option>
       <option value="az">A-Z</option>
@@ -16,17 +23,23 @@
   </div>
 </div>
 
+<!-- Message displayed when no products match the search -->
 <div *ngIf="filteredProducts.length === 0" class="no-results">
   No products match your search of "{{searchTerm}}".
 </div>
 
+<!-- Container for displaying filtered products -->
 <div class="product-container" *ngIf="filteredProducts.length > 0">
+  <!-- Loop through filtered products and display each one -->
   <div *ngFor="let product of filteredProducts" class="product-card">
+    <!-- Product image with click event to view details -->
     <img [src]="product.imageUrl" alt="{{product.name}}" class="product-image" (click)="viewProductDetails(product._id)">
+    <!-- Product name -->
     <h2 class="product-name">{{product.name}}</h2>
+    <!-- Product price -->
     <p class="product-price">€{{product.price}}</p>
 
-    <!-- Show edit and delete buttons only if the user is authenticated -->
+    <!-- Buttons to edit or delete product, shown only if the user is authenticated -->
     <div class="button-group" *ngIf="userIsAuthenticated">
       <button class="edit-button" (click)="editProduct(product._id)">Edit</button>
       <button class="delete-button" (click)="deleteProduct(product._id)">Delete</button>

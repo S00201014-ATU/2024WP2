@@ -1,146 +1,166 @@
+/* Container for search and filter elements */
 .search-filter-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Centre items horizontally */
+  gap: 20px; /* Space between items */
+  margin-bottom: 20px; /* Space below the container */
+  margin-top: 10px; /* Space above the container */
 }
 
+/* Styles for the search bar area */
 .search-bar {
-  display: flex;
-  align-items: center;
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Centre items vertically */
 }
 
+/* Styles for the search input field */
 .search-input {
-  width: 300px;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 8px 0 0 8px;
-  border: 1px solid #ccc;
+  width: 300px; /* Fixed width for the input */
+  padding: 10px; /* Space inside the input */
+  font-size: 16px; /* Text size */
+  border-radius: 8px 0 0 8px; /* Rounded corners on the left */
+  border: 1px solid #ccc; /* Border colour and style */
 }
 
+/* Styles for the search button */
 .search-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-left: none;
-  border-radius: 0 8px 8px 0;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
+  padding: 10px 20px; /* Space inside the button */
+  font-size: 16px; /* Text size */
+  border: 1px solid #ccc; /* Border colour and style */
+  border-left: none; /* Remove the left border */
+  border-radius: 0 8px 8px 0; /* Rounded corners on the right */
+  background-color: #007bff; /* Button background colour */
+  color: white; /* Text colour */
+  cursor: pointer; /* Pointer cursor on hover */
 }
 
+/* Button hover effect */
 .search-button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Darker background on hover */
 }
 
+/* Container for filter options */
 .filter-bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Centre items vertically */
+  gap: 10px; /* Space between items */
+  margin-top: 10px; /* Space above the filter bar */
 }
 
+/* Styles for filter labels */
 .filter-bar label {
-  font-size: 16px;
+  font-size: 16px; /* Text size */
 }
 
+/* Styles for filter dropdowns */
 .filter-bar select {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  cursor: pointer;
+  padding: 10px; /* Space inside the dropdown */
+  font-size: 16px; /* Text size */
+  border-radius: 8px; /* Rounded corners */
+  border: 1px solid #ccc; /* Border colour and style */
+  background-color: #f9f9f9; /* Background colour */
+  cursor: pointer; /* Pointer cursor */
 }
 
+/* Dropdown focus effect */
 .filter-bar select:focus {
-  border-color: #007bff;
-  outline: none;
+  border-color: #007bff; /* Change border colour on focus */
+  outline: none; /* Remove default focus outline */
 }
 
+/* Container for product items */
 .product-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 50px;
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: wrap; /* Allow wrapping to next line */
+  gap: 20px; /* Space between items */
+  justify-content: center; /* Centre items horizontally */
+  align-items: flex-start; /* Align items to the top */
+  margin-top: 50px; /* Space above the product container */
 }
 
+/* Styles for individual product cards */
 .product-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease;
+  background-color: #fff; /* Card background colour */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  overflow: hidden; /* Hide overflow content */
+  transition: transform 0.3s ease; /* Smooth transform effect */
 }
 
+/* Product card hover effect */
 .product-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px); /* Lift card on hover */
 }
 
+/* Styles for product images */
 .product-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  cursor: pointer;
+  width: 100%; /* Full width */
+  height: 200px; /* Fixed height */
+  object-fit: cover; /* Crop image to fit */
+  cursor: pointer; /* Pointer cursor on hover */
 }
 
+/* Styles for product names */
 .product-name {
-  font-size: 1.2rem;
-  margin-top: 10px 0;
-  margin-left: 10px;
+  font-size: 1.2rem; /* Text size */
+  margin-top: 10px; /* Space above the name */
+  margin-left: 10px; /* Space on the left */
 }
 
+/* Styles for product prices */
 .product-price {
-  font-size: 1rem;
-  margin-left: 10px;
-  margin-bottom: 10px;
+  font-size: 1rem; /* Text size */
+  margin-left: 10px; /* Space on the left */
+  margin-bottom: 10px; /* Space below the price */
 }
 
+/* Container for action buttons */
 .button-group {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space buttons evenly */
+  padding: 10px; /* Space inside the button group */
 }
 
+/* Styles for edit and delete buttons */
 .edit-button,
 .delete-button {
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  padding: 8px 16px; /* Space inside the buttons */
+  font-size: 0.9rem; /* Text size */
+  color: #fff; /* Text colour */
+  background-color: #007bff; /* Background colour */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background colour change */
 }
 
+/* Button hover effect */
 .edit-button:hover,
 .delete-button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Darker background on hover */
 }
 
+/* Message for no search results */
 .no-results {
-  text-align: center;
-  margin-top: 20px;
-  color: #ff0000;
-  font-size: 1.2rem;
+  text-align: center; /* Centre text */
+  margin-top: 20px; /* Space above the message */
+  color: #ff0000; /* Text colour */
+  font-size: 1.2rem; /* Text size */
 }
 
+/* Responsive styles for smaller screens */
 @media screen and (max-width: 768px) {
   .search-filter-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Centre items horizontally */
+    gap: 15px; /* Space between items */
   }
 
   .search-input {
-    width: 100%;
+    width: 100%; /* Full width on small screens */
   }
 
   .product-container {
-    justify-content: space-around;
+    justify-content: space-around; /* Space items evenly */
   }
 }
