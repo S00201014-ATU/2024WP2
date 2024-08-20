@@ -1,4 +1,4 @@
-/* Container for the authentication form */
+/* Center the authentication form in the middle of the page */
 .auth-container {
   display: flex;
   justify-content: center;
@@ -7,7 +7,7 @@
   background-color: #f0f2f5;
 }
 
-/* Card for the form */
+/* Style for the form card */
 .auth-card {
   background-color: white;
   padding: 40px;
@@ -17,7 +17,7 @@
   max-width: 400px;
 }
 
-/* Title of the form */
+/* Style for the form title */
 .auth-title {
   text-align: center;
   margin-bottom: 30px;
@@ -25,12 +25,12 @@
   color: #333;
 }
 
-/* Form group container */
+/* Container for each form input group */
 .form-group {
   margin-bottom: 20px;
 }
 
-/* Label styling */
+/* Style for the labels of form fields */
 .form-group label {
   display: block;
   font-size: 14px;
@@ -38,7 +38,7 @@
   color: #555;
 }
 
-/* Input styling */
+/* Style for the input fields */
 .form-group input {
   width: 100%;
   padding: 12px;
@@ -48,12 +48,13 @@
   transition: border-color 0.3s ease;
 }
 
+/* Input field style when focused */
 .form-group input:focus {
   border-color: #007bff;
   outline: none;
 }
 
-/* Submit button styling */
+/* Style for the submit button */
 .auth-button {
   width: 100%;
   padding: 12px;
@@ -66,21 +67,24 @@
   transition: background-color 0.3s ease;
 }
 
+/* Submit button hover effect */
 .auth-button:hover {
   background-color: #0056b3;
 }
 
-/* Switch to registration link */
+/* Style for the link to switch between login and registration */
 .auth-switch {
   text-align: center;
   margin-top: 20px;
 }
 
+/* Style for the link inside the switch section */
 .auth-switch a {
   color: #007bff;
   text-decoration: none;
 }
 
+/* Hover effect for the switch link */
 .auth-switch a:hover {
   text-decoration: underline;
 }
