@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://two024wp2-backend.onrender.com/auth'; // Updated API URL for authentication
-  private authStatus = new BehaviorSubject<boolean>(this.isAuthenticated());  // Track authentication status with BehaviorSubject
+  private apiUrl = 'https://two024wp2-backend.onrender.com/auth';
+  private authStatus = new BehaviorSubject<boolean>(this.isAuthenticated());  // Track authentication status
 
   constructor(private http: HttpClient, private router: Router) {}  // Inject HttpClient and Router
 
@@ -30,9 +30,7 @@ export class AuthService {
           if (response && response.token) {
             this.setToken(response.token); // Store the token in localStorage
             this.authStatus.next(true);  // Update auth status to logged in
-            console.log("User logged in, token stored"); // Debugging message
-            alert("Login successful!");  // Notify the user of successful login
-            this.router.navigate(['/products']);  // Redirect to products page
+            this.router.navigate(['/products']);  // Redirect to products page after successful login
           }
         })
       );
@@ -40,11 +38,8 @@ export class AuthService {
 
   // Logout the user and remove the token
   logout(): void {
-    console.log("Logout function called");  // Debugging message
     localStorage.removeItem('authToken'); // Remove the token from localStorage
     this.authStatus.next(false);  // Update auth status to logged out
-    alert("You have been logged out.");  // Notify the user of successful logout
-    console.log("User logged out, token removed"); // Debugging message
     this.router.navigate(['/login']);  // Redirect to login page
   }
 
