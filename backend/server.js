@@ -45,26 +45,7 @@ connectToMongoose();
 connectToMongoClient();
 
 app.use(bodyParser.json());
-
-// CORS configuration
-const allowedOrigins = [
-  'https://s00201014wp2.netlify.app', 
-  'http://localhost:4200'  
-];
-
-app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps, curl requests)
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-            return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-    },
-    methods: 'GET,POST,PUT,DELETE,OPTIONS',
-    allowedHeaders: 'Content-Type,Authorization'
-}));
+app.use(cors());
 
 app.use('/auth', authRoutes); // Routes for user authentication
 
@@ -114,8 +95,10 @@ app.post('/products', async (req, res) => {
     try {
         const collection = req.db.collection('products');
         const { _id, ...productData } = req.body;
+
         const result = await collection.insertOne(productData);
         const newProduct = await collection.findOne({ _id: result.insertedId });
+
         res.json(newProduct);
     } catch (error) {
         console.error('Error creating product', error);
@@ -131,6 +114,7 @@ app.put('/products/:id', async (req, res) => {
         const updatedProduct = req.body;
         
         delete updatedProduct._id; // Remove _id to avoid conflicts
+
         const result = await collection.findOneAndUpdate(
             { _id: new ObjectId(id) },
             { $set: updatedProduct }, 
@@ -144,7 +128,7 @@ app.put('/products/:id', async (req, res) => {
 
         res.json(updatedDocument);
     } catch (error) {
-        console.error('Error updating product', error);
+        console.error('Error updating product:', error);
         res.status(500).json({ error: 'Error updating product' });
     }
 });
