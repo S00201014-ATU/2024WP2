@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3000/products'; // API URL for product operations
+  private apiUrl = 'https://two024wp2-backend.onrender.com/products'; // Updated API URL for product operations
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth'; // API URL for authentication
+  private apiUrl = 'https://two024wp2-backend.onrender.com/auth'; // Updated API URL for authentication
   private authStatus = new BehaviorSubject<boolean>(this.isAuthenticated());  // Track authentication status with BehaviorSubject
 
   constructor(private http: HttpClient, private router: Router) {}  // Inject HttpClient and Router
