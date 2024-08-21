@@ -46,9 +46,22 @@ connectToMongoClient();
 
 app.use(bodyParser.json());
 
-// Configure CORS to allow requests from your Netlify site
+// CORS configuration
+const allowedOrigins = [
+  'https://s00201014wp2.netlify.app', 
+  'http://localhost:4200'  
+];
+
 app.use(cors({
-    origin: '*',
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps, curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
     methods: 'GET,POST,PUT,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type,Authorization'
 }));
@@ -72,20 +85,14 @@ app.use((req, res, next) => {
 // Get all products from the database
 app.get('/products', async (req, res) => {
     try {
-        console.log("Attempting to fetch products..."); // Debugging log
         const collection = req.db.collection('products');
-
-        console.log("Database connected. Querying products..."); // Debugging log
         const products = await collection.find({}).toArray();
-
-        console.log("Products fetched:", products); // Debugging log to see the result
         res.json(products);
     } catch (error) {
         console.error('Error fetching products', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
 
 // Get a specific product by its ID
 app.get('/products/:id', async (req, res) => {
@@ -107,10 +114,8 @@ app.post('/products', async (req, res) => {
     try {
         const collection = req.db.collection('products');
         const { _id, ...productData } = req.body;
-
         const result = await collection.insertOne(productData);
         const newProduct = await collection.findOne({ _id: result.insertedId });
-
         res.json(newProduct);
     } catch (error) {
         console.error('Error creating product', error);
@@ -126,7 +131,6 @@ app.put('/products/:id', async (req, res) => {
         const updatedProduct = req.body;
         
         delete updatedProduct._id; // Remove _id to avoid conflicts
-
         const result = await collection.findOneAndUpdate(
             { _id: new ObjectId(id) },
             { $set: updatedProduct }, 
@@ -140,7 +144,7 @@ app.put('/products/:id', async (req, res) => {
 
         res.json(updatedDocument);
     } catch (error) {
-        console.error('Error updating product:', error);
+        console.error('Error updating product', error);
         res.status(500).json({ error: 'Error updating product' });
     }
 });
