@@ -72,14 +72,20 @@ app.use((req, res, next) => {
 // Get all products from the database
 app.get('/products', async (req, res) => {
     try {
+        console.log("Attempting to fetch products..."); // Debugging log
         const collection = req.db.collection('products');
+
+        console.log("Database connected. Querying products..."); // Debugging log
         const products = await collection.find({}).toArray();
+
+        console.log("Products fetched:", products); // Debugging log to see the result
         res.json(products);
     } catch (error) {
         console.error('Error fetching products', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 // Get a specific product by its ID
 app.get('/products/:id', async (req, res) => {
