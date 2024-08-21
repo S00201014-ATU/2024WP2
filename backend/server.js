@@ -48,7 +48,7 @@ app.use(bodyParser.json());
 
 // Configure CORS to allow requests from your Netlify site
 app.use(cors({
-    origin: 'https://66c5c28dad1300008e7d771e--serene-panda-09561a.netlify.app', // Replace this with your actual Netlify URL
+    origin: '*',
     methods: 'GET,POST,PUT,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type,Authorization'
 }));
