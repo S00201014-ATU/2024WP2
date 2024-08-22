@@ -60,11 +60,14 @@ export class ProductEditComponent implements OnInit {
         },
         (error: any) => {
           console.error('Error updating product:', error);
-          alert('Error updating product. Please try again.');
+          alert('Product updated, but there was an error in the process.');
+          this.router.navigate(['/']);
         }
       );
     } else {
       console.error('Cannot update product: Product or product._id is null or undefined.');
+      alert('Product update failed. Redirecting to the homepage.');
+      this.router.navigate(['/']);
     }
   }
 }
