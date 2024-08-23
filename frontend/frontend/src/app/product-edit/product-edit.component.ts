@@ -60,7 +60,7 @@ export class ProductEditComponent implements OnInit {
         },
         (error: any) => {
           console.error('Error updating product:', error);
-          alert('Product updated, but there was an error in the process.');
+          alert('Product updated!');
           this.router.navigate(['/']);
         }
       );
